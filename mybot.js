@@ -3,9 +3,20 @@ var secrets = require("./secrets.js");
 var bot = new Discord.Client();
 
 bot.on("message", msg => {
-    if (msg.content.startsWith("/define")) {
-        msg.channel.sendMessage("This is your trash definition that I haven't figured out yet!");
-    }
+
+  // prefix var
+  let prefix = "/";
+  // prefix check
+  if(!msg.content.startsWith(prefix)) return;
+  // bot check
+  if(!msg.author.bot) return;
+  if (msg.content.startsWith(prefix + "define")) {
+      msg.channel.sendMessage("This is your trash definition that I haven't figured out yet!");
+  }
+
+  else if (msg.content.startsWith(prefix + "buffy")) {
+    msg.channel.sendMessage("I may be dead, but I’m still pretty.");
+  }
 });
 
 bot.on('ready', () => {
