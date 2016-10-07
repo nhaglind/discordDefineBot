@@ -8,8 +8,8 @@ bot.on("message", msg => {
   let prefix = "/";
   // prefix check
   if(!msg.content.startsWith(prefix)) return;
-  // bot check
-  if(!msg.author.bot) return;
+  // bots don't talk to themselves (anti-skynet provision)
+  if(msg.author.bot) return;
   if (msg.content.startsWith(prefix + "define")) {
       msg.channel.sendMessage("This is your trash definition that I haven't figured out yet!");
   }
