@@ -13,7 +13,18 @@ bot.on("message", msg => {
   // bots don't talk to themselves (anti-skynet provision)
   if(msg.author.bot) return;
   if (msg.content.startsWith(prefix + "define")) {
-      msg.channel.sendMessage("This is your trash definition that I haven't figured out yet!");
+    console.log(msg.content);
+
+    var url = 'https://owlbot.info/api/v1/dictionary/' + msg.content.slice(8);
+    console.log(url);
+    request(url, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        var definitionData = JSON.parse(body);
+        msg.channel.sendMessage("Type: " + definitionData[0].type);
+        msg.channel.sendMessage("Defenition: " + definitionData[0].defenition);
+        msg.channel.sendMessage("Example: " + definitionData[0].example);
+      }
+    })
   }
 
   else if (msg.content.startsWith(prefix + "buffy")) {
